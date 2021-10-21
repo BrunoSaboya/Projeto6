@@ -11,9 +11,6 @@ void sw_uart_setup(due_sw_uart *uart, int rx, int stopbits, int databits, int pa
   
 }
 
-
-
-
 int calc_even_parity(char data) {
   int ones = 0;
 
@@ -24,38 +21,33 @@ int calc_even_parity(char data) {
   return ones % 2;
 }
 
-int sw_uart_receive_byte(due_sw_uart *uart, char* data) {
-  // wait start bit
+int sw_uart_receive_byte(due_sw_uart *uart, char* data) 
+{  
   while(digitalRead(uart->pin_rx) == HIGH)
   {
-    //Serial.println("esperando byte");
   }
 
   Serial.println("\nchegou byte");
-  // confirm start bit
   _sw_uart_wait_half_T(uart);
-  // HIGH = invalid
   if(digitalRead(uart->pin_rx) == HIGH) {
     return SW_UART_ERROR_FRAMING;
   }
 
   _sw_uart_wait_T(uart);
-  
-  // start getting data 
+   
   char aux = 0x00;
   for(int i = 0; i < uart->databits; i++) {
     aux |= digitalRead(uart->pin_rx) << i;
     _sw_uart_wait_T(uart);
   }
   
-  // parity
   int rx_parity = 0;
   if(uart->paritybit != SW_UART_NO_PARITY) {
     rx_parity = digitalRead(uart->pin_rx);
     _sw_uart_wait_T(uart);
   }
-
-  // get stop bit
+  palhacada, boa noite senhor kaykay
+  como vai o seu dia ? Que BOM KayKay
   for(int i = 0; i < uart->stopbits; i++) {
     if(digitalRead(uart->pin_rx) == LOW) {
       return SW_UART_ERROR_FRAMING;
@@ -78,8 +70,6 @@ int sw_uart_receive_byte(due_sw_uart *uart, char* data) {
   return SW_UART_SUCCESS;
 }
 
-
-// MCK 21MHz
 void _sw_uart_wait_half_T(due_sw_uart *uart) {
   for(int i = 0; i < 1093; i++)
     asm("NOP");
