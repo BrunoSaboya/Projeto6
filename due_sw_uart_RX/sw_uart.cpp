@@ -46,8 +46,6 @@ int sw_uart_receive_byte(due_sw_uart *uart, char* data)
     rx_parity = digitalRead(uart->pin_rx);
     _sw_uart_wait_T(uart);
   }
-  palhacada, boa noite senhor kaykay
-  como vai o seu dia ? Que BOM KayKay
   for(int i = 0; i < uart->stopbits; i++) {
     if(digitalRead(uart->pin_rx) == LOW) {
       return SW_UART_ERROR_FRAMING;
