@@ -28,7 +28,7 @@ void sw_uart_write_byte(due_sw_uart *uart, char data){
   _sw_uart_wait_T(uart);
 
   for (int i=0; i<8; i++){
-    digitalWrite(uart->pin_tx,(data >> i & 1);
+    digitalWrite(uart->pin_tx,(data >> i & 0x01));
     _sw_uart_wait_T(uart);  
   }
 

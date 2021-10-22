@@ -14,9 +14,9 @@ struct due_sw_uart {
 
 typedef struct due_sw_uart due_sw_uart;
 
-#define SW_UART_SUCCESS     0
-#define SW_UART_ERROR_FRAMING   112
-#define SW_UART_ERROR_PARITY    2
+#define SW_UART_SUCCESS       0
+#define SW_UART_ERROR_FRAMING 112
+#define SW_UART_ERROR_PARITY  2
 #define SW_UART_NO_PARITY     0
 #define SW_UART_ODD_PARITY    1
 #define SW_UART_EVEN_PARITY   2
